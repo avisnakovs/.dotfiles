@@ -1,5 +1,3 @@
-
-   
 #!/usr/bin/env zsh
 
 if [[ -z $STOW_FOLDERS ]]; then
@@ -10,6 +8,6 @@ if [[ -z $DOTFILES ]]; then
     DOTFILES=$HOME/.dotfiles
 fi
 
-STOW_FOLDERS=$STOW_FOLDERS 
-DOTFILES=$DOTFILES 
+export STOW_FOLDERS=$STOW_FOLDERS 
+export DOTFILES=$DOTFILES 
 $DOTFILES/link

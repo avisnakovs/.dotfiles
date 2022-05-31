@@ -1,9 +1,21 @@
 #!/usr/bin/env zsh
 
+if [[ -z $STOW_FOLDERS ]]; then
+    echo "STOW_FOLDERS env variable not set"
+    exit 1 
+fi
+
+if [[ -z $DOTFILES ]]; then
+    echo "DOTFILES env variable not set"
+    exit 1 
+fi 
+
 pushd $DOTFILES
 for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
 do
+    echo "$folder"
     stow -D $folder
     stow $folder
 done
 popd
+
