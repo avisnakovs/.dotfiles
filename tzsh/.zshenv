@@ -17,7 +17,7 @@ export TOOLS=~/tools/bin
 export SMSSEND_REPO_PATH=$HOME/projects/messaging-interfaces/sms
 export SKIP_DOCKER_RESTART=true
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home
-export PATH=/usr/local/bin:/usr/local/sbin:$GOPATH/bin:$DOOM_PATH:$PATH
+export PATH=$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:$GOPATH/bin:$DOOM_PATH:$PATH
 
 # pyenv 
 eval "$(pyenv init --path)"
