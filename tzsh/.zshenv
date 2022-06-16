@@ -15,7 +15,7 @@ export GOPATH=~/gopath
 export DOOM_PATH=~/.emacs.d/bin
 export TOOLS=~/tools/bin
 export SMSSEND_REPO_PATH=$HOME/projects/messaging-interfaces/sms
-export SKIP_DOCKER_RESTART=true
+export SKIP_DOCKER_RESTART=false
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home
 export PATH=$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:$GOPATH/bin:$DOOM_PATH:$PATH
 
