@@ -39,8 +39,9 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
 Plug 'wlangstroth/vim-racket'
-Plug 'scrooloose/syntastic'
 Plug 'kien/rainbow_parentheses.vim'
+Plug 'vim-test/vim-test'
+Plug 'dense-analysis/ale'
 
 call plug#end()
 
@@ -78,3 +79,9 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
+" vim-test mapping for running tests 
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
