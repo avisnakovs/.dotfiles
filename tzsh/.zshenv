@@ -12,12 +12,13 @@
 
 export GO111MODULE=on
 export GOPATH=~/gopath
-export DOOM_PATH=~/.emacs.d/bin
-export TOOLS=~/tools/bin
 export SMSSEND_REPO_PATH=$HOME/projects/messaging-interfaces/sms
 export SKIP_DOCKER_RESTART=false
+export TOOLS=~/tools/bin
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home
-export PATH=$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:$GOPATH/bin:$DOOM_PATH:$PATH
+export PYTHON_BIN=$HOME/Library/Python/3.9/bin
+export K_BIN=/usr/local/opt/kubernetes-cli@1.22/bin
+export PATH=$K_BIN:$PYTHON_BIN:$TOOLS:$HOME/.local/bin:/usr/local/bin:/usr/local/sbin:$GOPATH/bin:$PATH
 
 # pyenv 
 eval "$(pyenv init --path)"
@@ -27,3 +28,8 @@ eval "$(pyenv virtualenv-init -)"
 export OWL="/Users/avisnakovs/projects/owl"
 eval "$("$OWL/bin/owl" init -)"
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+. "$HOME/.cargo/env"

@@ -155,3 +155,5 @@ function uscript() {
     echo "cd /Unity.app/Contents/Resources/ScriptTemplates"
 }
 
+_K8SAFETY_DEPDIR=/Users/avisnakovs/Projects/3rdparty; source /Users/avisnakovs/tools/k8s-enable/k8s-safety.sh
+
