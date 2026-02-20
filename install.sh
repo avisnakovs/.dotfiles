@@ -128,6 +128,15 @@ create_symlinks() {
 # 5. Zinit (zsh plugin manager)
 # ─────────────────────────────────────────────
 install_zinit() {
+  # Remove dangling ~/.local symlink if it exists (left over from old dotfiles)
+  if [[ -L "$HOME/.local" && ! -e "$HOME/.local" ]]; then
+    warn "Removing dangling symlink: ~/.local → $(readlink "$HOME/.local")"
+    rm "$HOME/.local"
+  fi
+
+  # Ensure ~/.local/share exists for zinit
+  mkdir -p "$HOME/.local/share"
+
   if [[ ! -d "$HOME/.local/share/zinit" ]]; then
     info "Installing zinit..."
     bash -c "$(curl --fail --show-error --silent --location https://raw.githubusercontent.com/zdharma-continuum/zinit/HEAD/scripts/install.sh)" -- --no-edit-zshrc
