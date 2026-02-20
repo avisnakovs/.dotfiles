@@ -1,0 +1,63 @@
+# Starship prompt configuration
+# https://starship.rs/config/
+
+# Overall format
+format = """
+$directory\
+$git_branch\
+$git_status\
+$golang\
+$java\
+$nodejs\
+$docker_context\
+$line_break\
+$character"""
+
+# Don't print a new line at the start
+add_newline = false
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "bold cyan"
+
+[git_branch]
+format = "[$symbol$branch(:$remote_branch)]($style) "
+style = "bold purple"
+symbol = " "
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+style = "bold yellow"
+stashed = "≡"
+
+[golang]
+format = "[$symbol($version)]($style) "
+symbol = " "
+style = "bold blue"
+
+[java]
+format = "[$symbol($version)]($style) "
+symbol = " "
+style = "bold red"
+
+[nodejs]
+format = "[$symbol($version)]($style) "
+symbol = " "
+style = "bold green"
+detect_files = ["package.json"]
+
+[dotnet]
+format = "[$symbol($version)]($style) "
+symbol = "󰪮 "
+style = "bold magenta"
+
+[docker_context]
+format = "[$symbol$context]($style) "
+symbol = " "
+style = "bold blue"
+only_with_files = true

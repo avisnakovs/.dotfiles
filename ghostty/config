@@ -1,0 +1,56 @@
+# ─────────────────────────────────────────────
+# Ghostty Configuration
+# ─────────────────────────────────────────────
+
+# Font
+font-family = JetBrainsMono Nerd Font
+font-size = 14
+
+# Theme (matches Catppuccin Mocha)
+theme = catppuccin-mocha
+
+# Window
+window-padding-x = 8
+window-padding-y = 4
+window-decoration = true
+macos-titlebar-style = tabs
+macos-option-as-alt = true
+
+# Shell
+shell-integration = zsh
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+
+# ── Splits (vim-style navigation) ──
+# Navigate between splits
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+l=goto_split:right
+
+# Create splits
+keybind = cmd+d=new_split:right
+keybind = cmd+shift+d=new_split:down
+
+# Close split
+keybind = cmd+w=close_surface
+
+# Resize splits
+keybind = cmd+shift+left=resize_split:left,20
+keybind = cmd+shift+right=resize_split:right,20
+keybind = cmd+shift+up=resize_split:up,20
+keybind = cmd+shift+down=resize_split:down,20
+
+# ── Tabs ──
+keybind = cmd+t=new_tab
+keybind = cmd+1=goto_tab:1
+keybind = cmd+2=goto_tab:2
+keybind = cmd+3=goto_tab:3
+
+# Scrollback
+scrollback-limit = 10000
+
+# Confirm close (prevents accidental close of nvim sessions)
+confirm-close-surface = true

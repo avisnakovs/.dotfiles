@@ -1,0 +1,39 @@
+[user]
+	name = avisnakovs
+	email = alexander@visnakovs.com
+
+[init]
+	defaultBranch = main
+
+[core]
+	editor = nvim
+	autocrlf = input
+	pager = bat --style=changes
+	excludesfile = ~/.gitignore_global
+
+[pull]
+	rebase = true
+
+[push]
+	autoSetupRemote = true
+	default = current
+
+[merge]
+	conflictstyle = diff3
+
+[diff]
+	colorMoved = default
+
+[rerere]
+	enabled = true
+
+[alias]
+	st = status
+	co = checkout
+	br = branch
+	ci = commit
+	lg = log --oneline --graph --decorate -20
+	unstage = reset HEAD --
+	last = log -1 HEAD
+	# Show stash list with dates
+	sl = stash list --format='%gd: %ci - %gs'
