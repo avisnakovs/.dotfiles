@@ -3,7 +3,7 @@
 # ─────────────────────────────────────────────
 
 # Font
-font-family = JetBrainsMono Nerd Font
+font-family = FiraMono Nerd Font
 font-size = 14
 
 # Theme (matches Catppuccin Mocha)

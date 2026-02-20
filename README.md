@@ -12,7 +12,7 @@ chmod +x install.sh
 ./install.sh
 ```
 
-Then restart your terminal.
+Then restart your terminal. See [Manual Post-Install Steps](#manual-post-install-steps) below for anything that can't be automated.
 
 ## What Gets Installed
 
@@ -20,7 +20,10 @@ Then restart your terminal.
 - **Neovim** — editor
 - **Ghostty** — GPU-accelerated terminal with native splits
 - **Go** + gopls, delve, gofumpt, goimports, golangci-lint
-- **Node.js** — required by some Neovim LSPs
+- **Java** (OpenJDK 21) + Maven, Gradle — for Quarkus work
+- **C# / .NET** — for Unity scripting (OmniSharp)
+- **Python 3.12**
+- **Node.js** + pnpm — required by some Neovim LSPs and Next.js
 - **lazygit** — git TUI (used inside Neovim)
 - **ripgrep**, **fd** — fast search (used by Telescope)
 - **starship** — fast shell prompt
@@ -28,11 +31,13 @@ Then restart your terminal.
 - **eza** — modern `ls` with icons
 - **bat** — `cat` with syntax highlighting
 - **fzf** — fuzzy finder
-- **JetBrains Mono Nerd Font** — terminal/editor font
+- **FiraMono Nerd Font** — terminal/editor font with icons
 
 ### Neovim (LazyVim)
 - **Go language support** — gopls, semantic tokens, formatting, linting
-- **Java language support** — for Quarkus work
+- **Java language support** — jdtls for Quarkus work
+- **C# language support** — OmniSharp for Unity
+- **TypeScript/JavaScript** — vtsls, ESLint, Prettier, Tailwind CSS
 - **Debugging** — DAP + delve (breakpoints, variable inspection)
 - **diffview.nvim** — side-by-side diff review + stash viewer
 - **Claude Code integration** — WebSocket bridge
@@ -105,7 +110,8 @@ dotfiles/
 ├── starship/
 │   └── starship.toml
 └── git/
-    └── .gitconfig
+    ├── .gitconfig
+    └── .gitignore_global
 ```
 
 ## Customizing
@@ -130,4 +136,43 @@ dotfiles/
 
 Navigate: Ctrl+H/J/K/L (vim-style)
 ```
-# .dotfiles
+
+## Manual Post-Install Steps
+
+These steps require manual action and can't be fully automated by `install.sh`.
+
+### Java symlink (requires sudo)
+
+The install script will prompt for your password, but if it fails or you skipped it:
+
+```bash
+sudo ln -sfn /opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-21.jdk
+```
+
+Verify: `java --version` should show OpenJDK 21.
+
+### Caps Lock → Escape (recommended for vim)
+
+System Settings → Keyboard → Keyboard Shortcuts → Modifier Keys → Set Caps Lock to Escape.
+
+### Set Ghostty as default terminal (optional)
+
+System Settings → Desktop & Dock → Default terminal application → Ghostty.
+
+### Neovim first launch
+
+On first `nvim` launch, Lazy.nvim will auto-install all plugins (takes 1-3 minutes). After that:
+
+1. Run `:Mason` to verify LSP servers are installed (gopls, jdtls, omnisharp, vtsls, json-lsp, tailwindcss-language-server, eslint-lsp, prettier)
+2. Run `:checkhealth` to verify everything is working
+
+### Create GitHub repo
+
+```bash
+cd ~/.dotfiles
+git init
+git add -A
+git commit -m "initial dotfiles: neovim + ghostty + zsh + go/java/csharp/ts"
+git remote add origin git@github.com:YOUR_USERNAME/dotfiles.git
+git push -u origin main
+```

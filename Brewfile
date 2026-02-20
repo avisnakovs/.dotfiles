@@ -1,7 +1,7 @@
 # ─────────────────────────────────────────────
 # Taps
 # ─────────────────────────────────────────────
-tap "homebrew/bundle"
+# Note: homebrew/bundle is built-in since Homebrew 5.x, no tap needed
 tap "jesseduffield/lazygit"
 
 # ─────────────────────────────────────────────
@@ -57,5 +57,4 @@ cask "ghostty"
 # ─────────────────────────────────────────────
 # Fonts (Nerd Fonts for icons in Neovim)
 # ─────────────────────────────────────────────
-cask "font-jetbrains-mono-nerd-font"
-cask "font-fira-code-nerd-font"
+cask "font-fira-mono-nerd-font"

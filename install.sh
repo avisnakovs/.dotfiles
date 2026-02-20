@@ -38,7 +38,7 @@ install_homebrew() {
 # ─────────────────────────────────────────────
 install_packages() {
   info "Installing packages from Brewfile..."
-  brew bundle --file="$DOTFILES_DIR/Brewfile" --no-lock
+  brew bundle --file="$DOTFILES_DIR/Brewfile"
   success "Packages installed"
 }
 
@@ -64,11 +64,20 @@ install_go_tools() {
 # ─────────────────────────────────────────────
 setup_java() {
   # Symlink OpenJDK so system java wrappers find it
+  # Requires sudo — will prompt for password
   local jdk_path="/opt/homebrew/opt/openjdk@21"
   if [[ -d "$jdk_path" ]]; then
-    info "Linking OpenJDK 21..."
-    sudo ln -sfn "$jdk_path/libexec/openjdk.jdk" /Library/Java/JavaVirtualMachines/openjdk-21.jdk 2>/dev/null || true
-    success "Java 21 linked"
+    if [[ -L /Library/Java/JavaVirtualMachines/openjdk-21.jdk ]]; then
+      success "Java 21 already linked"
+    else
+      info "Linking OpenJDK 21 (requires sudo)..."
+      if sudo ln -sfn "$jdk_path/libexec/openjdk.jdk" /Library/Java/JavaVirtualMachines/openjdk-21.jdk; then
+        success "Java 21 linked"
+      else
+        warn "Could not link Java 21. Run manually after install:"
+        warn "  sudo ln -sfn $jdk_path/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-21.jdk"
+      fi
+    fi
   fi
 }
 
@@ -199,7 +208,7 @@ main() {
   echo "  3. Inside nvim, run: :LazyExtras and enable lang.go and dap.core"
   echo "  4. Install Go tools if skipped: run install.sh again after shell restart"
   echo ""
-  echo "Layout tip: In Ghostty use Ctrl+D to split right, Ctrl+Shift+D to split down"
+  echo "Layout tip: In Ghostty use Cmd+D to split right, Cmd+Shift+D to split down"
   echo "  Left pane: claude      Right pane: nvim      Bottom: terminal"
   echo ""
 }
