@@ -1,5 +1,5 @@
 -- Colorscheme: Catppuccin Mocha (vibrant + excellent semantic token support)
--- Other options to try: "cyberdream", "dracula", "tokyonight-storm"
+-- Other options to try: "dracula", "cyberdream", "tokyonight-storm"
 return {
   {
     "catppuccin/nvim",
@@ -48,6 +48,6 @@ return {
   },
 
   -- Also install alternatives so you can switch with :colorscheme <name>
-  { "scottmckendry/cyberdream.nvim" },
   { "Mofiqul/dracula.nvim" },
+  { "scottmckendry/cyberdream.nvim" },
 }
