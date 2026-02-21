@@ -157,7 +157,7 @@ System Settings → Keyboard → Keyboard Shortcuts → Modifier Keys → Set Ca
 
 ### Set Ghostty as default terminal (optional)
 
-System Settings → Desktop & Dock → Default terminal application → Ghostty.
+Open Ghostty → `Cmd+,` (Settings) → enable "Default Terminal". The old System Settings path (`Desktop & Dock → Default terminal application`) is no longer available in recent macOS versions.
 
 ### Neovim first launch
 
