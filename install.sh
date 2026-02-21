@@ -147,6 +147,33 @@ install_zinit() {
 }
 
 # ─────────────────────────────────────────────
+# 5b. Neovim providers (Python, Ruby, Node)
+# ─────────────────────────────────────────────
+install_neovim_providers() {
+  info "Installing Neovim providers..."
+
+  # Python provider (uses dedicated venv to avoid PEP 668 conflicts)
+  local python_venv="$HOME/.local/share/nvim/python-venv"
+  if [[ ! -d "$python_venv" ]]; then
+    /opt/homebrew/bin/python3.12 -m venv "$python_venv"
+  fi
+  "$python_venv/bin/pip" install -q pynvim
+  success "Python provider installed"
+
+  # Node provider
+  if command -v npm &>/dev/null; then
+    npm install -g neovim --silent 2>/dev/null
+    success "Node provider installed"
+  fi
+
+  # Ruby provider (requires Homebrew Ruby, not system Ruby)
+  if [[ -x /opt/homebrew/opt/ruby/bin/gem ]]; then
+    /opt/homebrew/opt/ruby/bin/gem install neovim --silent 2>/dev/null
+    success "Ruby provider installed"
+  fi
+}
+
+# ─────────────────────────────────────────────
 # 6. Neovim setup
 # ─────────────────────────────────────────────
 setup_neovim() {
@@ -203,6 +230,7 @@ main() {
   create_symlinks
   install_go_tools
   setup_java
+  install_neovim_providers
   setup_neovim
   set_macos_defaults
 

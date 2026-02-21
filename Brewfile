@@ -34,6 +34,7 @@ brew "lazygit"            # Git TUI (used inside Neovim)
 # ─────────────────────────────────────────────
 brew "go"
 brew "python@3.12"
+brew "ruby"               # Modern Ruby (macOS ships 2.6 which is too old)
 brew "dotnet"             # C# / Unity scripting (omnisharp needs this)
 
 # ─────────────────────────────────────────────

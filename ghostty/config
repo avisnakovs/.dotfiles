@@ -4,7 +4,7 @@
 
 # Font
 font-family = FiraMono Nerd Font
-font-size = 14
+font-size = 16
 
 # Theme (matches Catppuccin Mocha)
 theme = Catppuccin Mocha
@@ -13,6 +13,8 @@ theme = Catppuccin Mocha
 window-padding-x = 8
 window-padding-y = 4
 window-decoration = true
+window-width = 9999
+window-height = 9999
 macos-titlebar-style = tabs
 macos-option-as-alt = true
 

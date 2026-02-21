@@ -33,6 +33,9 @@ export PATH="$GOPATH/bin:$PATH"
 export JAVA_HOME="/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home"
 export PATH="$JAVA_HOME/bin:$PATH"
 
+# ── Ruby (Homebrew, replaces system Ruby 2.6) ──
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+
 # ── .NET (Unity C#) ──
 export DOTNET_ROOT="/opt/homebrew/opt/dotnet/libexec"
 export PATH="$DOTNET_ROOT:$PATH"

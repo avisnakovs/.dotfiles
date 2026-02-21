@@ -20,3 +20,7 @@ opt.clipboard = "unnamedplus" -- System clipboard integration
 
 -- Auto-reload files changed externally (by Claude Code)
 opt.autoread = true
+
+-- Neovim providers
+vim.g.python3_host_prog = vim.fn.expand("~/.local/share/nvim/python-venv/bin/python3")
+vim.g.ruby_host_prog = "/opt/homebrew/opt/ruby/bin/ruby"

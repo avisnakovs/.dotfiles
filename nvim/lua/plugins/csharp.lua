@@ -10,18 +10,16 @@ return {
         omnisharp = function(_, opts)
           -- OmniSharp sends non-standard semantic token names with spaces
           -- This patches them to use underscores so Neovim doesn't error
-          require("lazyvim.util").lsp.on_attach(function(client, _)
-            if client.name == "omnisharp" then
-              local caps = client.server_capabilities
-              if caps and caps.semanticTokensProvider then
-                local tokenTypes = caps.semanticTokensProvider.legend.tokenTypes
-                for i, v in ipairs(tokenTypes) do
-                  tokenTypes[i] = v:gsub(" ", "_")
-                end
-                local tokenModifiers = caps.semanticTokensProvider.legend.tokenModifiers
-                for i, v in ipairs(tokenModifiers) do
-                  tokenModifiers[i] = v:gsub(" ", "_")
-                end
+          Snacks.util.lsp.on({ name = "omnisharp" }, function(_, client)
+            local caps = client.server_capabilities
+            if caps and caps.semanticTokensProvider then
+              local tokenTypes = caps.semanticTokensProvider.legend.tokenTypes
+              for i, v in ipairs(tokenTypes) do
+                tokenTypes[i] = v:gsub(" ", "_")
+              end
+              local tokenModifiers = caps.semanticTokensProvider.legend.tokenModifiers
+              for i, v in ipairs(tokenModifiers) do
+                tokenModifiers[i] = v:gsub(" ", "_")
               end
             end
           end)
