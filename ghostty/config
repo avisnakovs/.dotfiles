@@ -3,7 +3,7 @@
 # ─────────────────────────────────────────────
 
 # Font
-font-family = FiraMono Nerd Font
+font-family = FiraCode Nerd Font Mono
 font-size = 16
 
 # Theme (matches Catppuccin Mocha)
@@ -37,6 +37,12 @@ keybind = cmd+w=close_surface
 keybind = cmd+physical:one=text:\x01\x31
 keybind = cmd+physical:two=text:\x01\x32
 keybind = cmd+physical:three=text:\x01\x33
+keybind = cmd+physical:four=text:\x01\x34
+keybind = cmd+physical:five=text:\x01\x35
+keybind = cmd+physical:six=text:\x01\x36
+keybind = cmd+physical:seven=text:\x01\x37
+keybind = cmd+physical:eight=text:\x01\x38
+keybind = cmd+physical:nine=text:\x01\x39
 
 # ── Tabs (Ghostty native, use Cmd+T to create) ──
 keybind = cmd+t=new_tab

@@ -59,4 +59,4 @@ brew "tmux"                # Terminal multiplexer (sessions, splits, detach)
 # ─────────────────────────────────────────────
 # Fonts (Nerd Fonts for icons in Neovim)
 # ─────────────────────────────────────────────
-cask "font-fira-mono-nerd-font"
+cask "font-fira-code-nerd-font"
