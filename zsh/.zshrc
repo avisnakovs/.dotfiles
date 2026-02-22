@@ -99,7 +99,7 @@ function gl() {
 # Set git user identity for current repo
 function ginit() {
   git config user.name "avisnakovs"
-  git config user.email alexander@visnakovs.com
+  git config user.email aleksandrs@hey.com
 }
 
 # mkdir and cd into it
