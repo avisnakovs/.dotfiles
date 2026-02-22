@@ -25,25 +25,12 @@ shell-integration = zsh
 cursor-style = block
 cursor-style-blink = false
 
-# ── Splits (vim-style navigation) ──
-# Navigate between splits
-keybind = ctrl+h=goto_split:left
-keybind = ctrl+j=goto_split:bottom
-keybind = ctrl+k=goto_split:top
-keybind = ctrl+l=goto_split:right
-
-# Create splits
+# ── Splits (using tmux now, but keep Ghostty splits as backup) ──
+# NOTE: Primary splits/sessions handled by tmux (prefix=C-a)
+# Ghostty splits kept for quick one-off use
 keybind = cmd+d=new_split:right
 keybind = cmd+shift+d=new_split:down
-
-# Close split
 keybind = cmd+w=close_surface
-
-# Resize splits
-keybind = cmd+shift+left=resize_split:left,20
-keybind = cmd+shift+right=resize_split:right,20
-keybind = cmd+shift+up=resize_split:up,20
-keybind = cmd+shift+down=resize_split:down,20
 
 # ── Tabs ──
 keybind = cmd+t=new_tab

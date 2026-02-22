@@ -121,6 +121,9 @@ create_symlinks() {
   # Starship prompt
   link_file "$DOTFILES_DIR/starship/starship.toml" "$HOME/.config/starship.toml"
 
+  # tmux
+  link_file "$DOTFILES_DIR/tmux/tmux.conf" "$HOME/.tmux.conf"
+
   success "Symlinks created"
 }
 
@@ -241,12 +244,15 @@ main() {
   echo ""
   echo "Next steps:"
   echo "  1. Restart your terminal (or run: source ~/.zshrc)"
-  echo "  2. Open Ghostty and run: nvim"
-  echo "  3. Inside nvim, run: :LazyExtras and enable lang.go and dap.core"
-  echo "  4. Install Go tools if skipped: run install.sh again after shell restart"
+  echo "  2. Start tmux: tmux new -s main"
+  echo "  3. Inside tmux, open nvim. Plugins will install on first launch."
+  echo "  4. Run :Mason to verify LSP servers are installed"
+  echo "  5. Run :checkhealth to verify everything is working"
   echo ""
-  echo "Layout tip: In Ghostty use Cmd+D to split right, Cmd+Shift+D to split down"
-  echo "  Left pane: claude      Right pane: nvim      Bottom: terminal"
+  echo "tmux cheatsheet:"
+  echo "  C-a |       Split right       C-a -       Split down"
+  echo "  C-a f       Sessionizer (fuzzy-find projects)"
+  echo "  C-a d       Detach            Ctrl+H/J/K/L  Navigate"
   echo ""
 }
 

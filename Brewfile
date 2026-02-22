@@ -51,9 +51,10 @@ brew "maven"
 brew "gradle"
 
 # ─────────────────────────────────────────────
-# Terminal
+# Terminal & multiplexer
 # ─────────────────────────────────────────────
 cask "ghostty"
+brew "tmux"                # Terminal multiplexer (sessions, splits, detach)
 
 # ─────────────────────────────────────────────
 # Fonts (Nerd Fonts for icons in Neovim)

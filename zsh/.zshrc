@@ -43,6 +43,9 @@ export PATH="$DOTNET_ROOT:$PATH"
 # ── Node (if installed via brew) ──
 export PATH="/opt/homebrew/opt/node/bin:$PATH"
 
+# ── Dotfiles scripts (tmux-sessionizer, etc.) ──
+export PATH="$HOME/.dotfiles/tmux:$PATH"
+
 # ── Editor ──
 export EDITOR="nvim"
 export VISUAL="nvim"
@@ -79,6 +82,12 @@ alias python="python3"
 # Claude Code
 alias cc="claude"
 
+# tmux
+alias ta="tmux attach -t"
+alias tn="tmux new -s"
+alias tl="tmux list-sessions"
+alias tk="tmux kill-session -t"
+
 # ── Functions ──
 
 # Interactive process killer using fzf
@@ -106,6 +115,9 @@ function ginit() {
 function mkdirc() {
   mkdir -p "$1" && cd "$1"
 }
+
+# ── tmux sessionizer (Ctrl+F to fuzzy-find projects) ──
+bindkey -s '^f' 'tmux-sessionizer\n'
 
 # ── fzf ──
 if command -v fzf &>/dev/null; then

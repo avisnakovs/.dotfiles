@@ -1,7 +1,7 @@
 # Dotfiles
 
 One command to set up a complete macOS development environment:
-Neovim (LazyVim) + Go + Claude Code + Ghostty terminal.
+Neovim (LazyVim) + tmux + Go + Claude Code + Ghostty terminal.
 
 ## Quick Start
 
@@ -24,6 +24,7 @@ Then restart your terminal. See [Manual Post-Install Steps](#manual-post-install
 - **C# / .NET** — for Unity scripting (OmniSharp)
 - **Python 3.12**
 - **Node.js** + pnpm — required by some Neovim LSPs and Next.js
+- **tmux** — terminal multiplexer (sessions, splits, detach)
 - **lazygit** — git TUI (used inside Neovim)
 - **ripgrep**, **fd** — fast search (used by Telescope)
 - **starship** — fast shell prompt
@@ -40,6 +41,12 @@ Then restart your terminal. See [Manual Post-Install Steps](#manual-post-install
 - **TypeScript/JavaScript** — vtsls, ESLint, Prettier, Tailwind CSS
 - **Debugging** — DAP + delve (breakpoints, variable inspection)
 - **diffview.nvim** — side-by-side diff review + stash viewer
+- **Harpoon 2** — bookmark files and jump instantly (ThePrimeagen)
+- **flash.nvim** — jump anywhere on screen with 1-2 keystrokes
+- **oil.nvim** — edit filesystem like a buffer
+- **undotree** — visualize and navigate undo history
+- **neotest** — run tests from inside nvim (Go adapter)
+- **vim-tmux-navigator** — seamless Ctrl+H/J/K/L between vim and tmux
 - **Claude Code integration** — WebSocket bridge
 - **catppuccin** theme — vibrant colors with LSP semantic token support
 - Alternative themes: cyberdream, dracula
@@ -52,6 +59,35 @@ Then restart your terminal. See [Manual Post-Install Steps](#manual-post-install
 - **starship** prompt — shows git branch, Go version, etc.
 
 ## Key Workflows
+
+### tmux (terminal multiplexer)
+```
+C-a |         → Split right
+C-a -         → Split down
+C-a f         → Sessionizer (fuzzy-find projects, switch sessions)
+C-a c         → New window
+C-a d         → Detach
+Ctrl+H/J/K/L  → Navigate between tmux panes AND vim splits
+```
+
+### Harpoon (bookmark files)
+```
+<leader>ha    → Add current file to harpoon
+<leader>hh    → Toggle harpoon menu
+<leader>1-4   → Jump to harpoon file 1-4
+```
+
+### Navigation
+```
+gd            → Go to definition
+gI            → Go to implementation
+gr            → Find references
+<leader>ff    → Find files
+<leader>sg    → Search in files (grep)
+<leader>e     → Toggle file tree
+s             → Flash jump (type 2 chars, press label)
+-             → Oil: open parent directory as buffer
+```
 
 ### Reviewing Claude Code changes
 ```
@@ -66,6 +102,14 @@ Tab/S-Tab     → Cycle through changed files
 <leader>gg    → Open LazyGit (stash tab for full management)
 ```
 
+### Testing
+```
+<leader>tt    → Run nearest test
+<leader>tf    → Run all tests in file
+<leader>ts    → Toggle test summary
+<leader>to    → Toggle test output
+```
+
 ### Debugging Go
 ```
 <leader>db    → Toggle breakpoint
@@ -75,14 +119,11 @@ F11           → Step into
 <leader>du    → Toggle debug UI
 ```
 
-### Navigation
+### Register discipline
 ```
-gd            → Go to definition
-gI            → Go to implementation
-gr            → Find references
-<leader>ff    → Find files
-<leader>sg    → Search in files (grep)
-<leader>e     → Toggle file tree
+<leader>p     → Paste without overwriting register (visual)
+<leader>d     → Delete to void register
+<leader>y     → Yank to system clipboard
 ```
 
 ## Structure
@@ -102,7 +143,12 @@ dotfiles/
 │           ├── colorscheme.lua
 │           ├── git.lua
 │           ├── claude.lua
-│           └── editor.lua
+│           ├── editor.lua
+│           ├── navigation.lua  # vim-tmux-navigator, harpoon, flash, oil
+│           └── tools.lua       # undotree, neotest
+├── tmux/
+│   ├── tmux.conf           # tmux configuration
+│   └── tmux-sessionizer    # Project switcher script
 ├── ghostty/
 │   └── config
 ├── zsh/
@@ -121,20 +167,21 @@ dotfiles/
 - **Add brew packages:** Edit `Brewfile`, then run `brew bundle`
 - **Shell aliases:** Edit `zsh/.zshrc`
 
-## Terminal Layout (Ghostty)
+## Terminal Layout (tmux)
 
 ```
 ┌─────────────────┬──────────────────┐
 │                 │                  │
 │   Claude Code   │     Neovim       │
 │                 │                  │
-│   Cmd+D split   │                  │
+│   C-a |         │                  │
 │                 ├──────────────────┤
 │                 │   Terminal       │
-│                 │   Cmd+Shift+D    │
+│                 │   C-a -          │
 └─────────────────┴──────────────────┘
 
-Navigate: Ctrl+H/J/K/L (vim-style)
+Navigate: Ctrl+H/J/K/L (seamless vim↔tmux)
+Sessions: C-a f (sessionizer — fuzzy-find projects)
 ```
 
 ## Manual Post-Install Steps
