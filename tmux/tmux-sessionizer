@@ -1,31 +1,44 @@
 #!/usr/bin/env bash
-# tmux-sessionizer — ThePrimeagen-style project switcher
+# tmux-sessionizer — project switcher
+# Creates a session with 2 windows: nvim (1) + claude (2)
+# If session already exists, just switches to it.
+#
 # Usage: tmux-sessionizer [path]
 # If no path given, uses fzf to pick from project directories.
 
-# ── Project directories to search ──
-# Add your project root directories here
-PROJECT_DIRS=(
+# ── Project directories to search (children up to 2 levels deep) ──
+SEARCH_PARENTS=(
     ~/projects
-    ~/work
+)
+
+# ── Standalone directories (listed directly, not their children) ──
+STANDALONE_DIRS=(
     ~/.dotfiles
 )
 
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    # Build list of directories to search (only ones that exist)
-    search_dirs=()
-    for dir in "${PROJECT_DIRS[@]}"; do
-        [[ -d "$dir" ]] && search_dirs+=("$dir")
+    # Build list: children of SEARCH_PARENTS + STANDALONE_DIRS themselves
+    candidates=""
+
+    for dir in "${SEARCH_PARENTS[@]}"; do
+        if [[ -d "$dir" ]]; then
+            candidates+=$(find "$dir" -mindepth 1 -maxdepth 2 -type d 2>/dev/null)
+            candidates+=$'\n'
+        fi
     done
 
-    if [[ ${#search_dirs[@]} -eq 0 ]]; then
-        echo "No project directories found. Edit PROJECT_DIRS in tmux-sessionizer."
+    for dir in "${STANDALONE_DIRS[@]}"; do
+        [[ -d "$dir" ]] && candidates+="$dir"$'\n'
+    done
+
+    if [[ -z "$candidates" ]]; then
+        echo "No project directories found. Edit SEARCH_PARENTS/STANDALONE_DIRS in tmux-sessionizer."
         exit 1
     fi
 
-    selected=$(find "${search_dirs[@]}" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | fzf)
+    selected=$(echo "$candidates" | sed '/^$/d' | fzf)
 fi
 
 if [[ -z $selected ]]; then
@@ -33,15 +46,24 @@ if [[ -z $selected ]]; then
 fi
 
 selected_name=$(basename "$selected" | tr . _)
-tmux_running=$(pgrep tmux)
 
-if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
-    tmux new-session -s "$selected_name" -c "$selected"
+if [[ -z $TMUX ]] && [[ -z $(pgrep tmux) ]]; then
+    # tmux not running at all — create session with 2 windows
+    tmux new-session -s "$selected_name" -c "$selected" -n nvim \; \
+        send-keys "nvim ." Enter \; \
+        new-window -n claude -c "$selected" \; \
+        send-keys "claude" Enter \; \
+        select-window -t 1
     exit 0
 fi
 
 if ! tmux has-session -t="$selected_name" 2>/dev/null; then
-    tmux new-session -ds "$selected_name" -c "$selected"
+    # Session doesn't exist — create it with 2 windows
+    tmux new-session -ds "$selected_name" -c "$selected" -n nvim
+    tmux send-keys -t "$selected_name:nvim" "nvim ." Enter
+    tmux new-window -t "$selected_name" -n claude -c "$selected"
+    tmux send-keys -t "$selected_name:claude" "claude" Enter
+    tmux select-window -t "$selected_name:1"
 fi
 
 tmux switch-client -t "$selected_name"

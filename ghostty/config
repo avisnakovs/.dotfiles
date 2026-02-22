@@ -32,11 +32,14 @@ keybind = cmd+d=new_split:right
 keybind = cmd+shift+d=new_split:down
 keybind = cmd+w=close_surface
 
-# ── Tabs ──
+# ── tmux window switching (Cmd+number feels native on macOS) ──
+# Unbind Ghostty's default tab switching, then send C-a + number to tmux
+keybind = cmd+physical:one=text:\x01\x31
+keybind = cmd+physical:two=text:\x01\x32
+keybind = cmd+physical:three=text:\x01\x33
+
+# ── Tabs (Ghostty native, use Cmd+T to create) ──
 keybind = cmd+t=new_tab
-keybind = cmd+1=goto_tab:1
-keybind = cmd+2=goto_tab:2
-keybind = cmd+3=goto_tab:3
 
 # Scrollback
 scrollback-limit = 10000
