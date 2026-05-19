@@ -124,6 +124,9 @@ create_symlinks() {
   # tmux
   link_file "$DOTFILES_DIR/tmux/tmux.conf" "$HOME/.tmux.conf"
 
+  # Claude Code skills
+  link_file "$DOTFILES_DIR/claude/skills" "$HOME/.claude/skills"
+
   success "Symlinks created"
 }
 

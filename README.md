@@ -155,9 +155,13 @@ dotfiles/
 │   └── .zshrc
 ├── starship/
 │   └── starship.toml
-└── git/
-    ├── .gitconfig
-    └── .gitignore_global
+├── git/
+│   ├── .gitconfig
+│   └── .gitignore_global
+└── claude/
+    └── skills/             # Claude Code custom skills (→ ~/.claude/skills)
+        └── k8s-pf/
+            └── SKILL.md    # Port-forward to MJ dev EKS pods
 ```
 
 ## Customizing
@@ -166,6 +170,7 @@ dotfiles/
 - **Add plugins:** Create new files in `nvim/lua/plugins/`
 - **Add brew packages:** Edit `Brewfile`, then run `brew bundle`
 - **Shell aliases:** Edit `zsh/.zshrc`
+- **Add Claude skills:** Create `claude/skills/<skill-name>/SKILL.md` — invoke with `/<skill-name>` in Claude Code
 
 ## Terminal Layout (tmux)
 
